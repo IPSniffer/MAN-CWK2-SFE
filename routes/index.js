@@ -2,12 +2,40 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 
+// LANDING PAGE
+
 router.get('/', function (req, res, next) {
-	return res.render('index.ejs');
+	return res.render('login.ejs');
+});
+
+router.post('/', function (req, res, next) {
+	//console.log(req.body);
+	User.findOne({email:req.body.email},function(err,data){
+		if(data){
+			
+			if(data.password==req.body.password){
+				//console.log("Done Login");
+				req.session.userId = data.unique_id;
+				//console.log(req.session.userId);
+				res.send({"Success":"Success!"});
+				
+			}else{
+				res.send({"Success":"Wrong password!"});
+			}
+		}else{
+			res.send({"Success":"This Email Is not registered!"});
+		}
+	});
 });
 
 
-router.post('/', function(req, res, next) {
+// REGISTER SECTION
+
+router.get('/register', function (req, res, next) {
+	return res.render('register.ejs');
+});
+
+router.post('/register', function(req, res, next) {
 	console.log(req.body);
 	var personInfo = req.body;
 
@@ -58,32 +86,7 @@ router.post('/', function(req, res, next) {
 	}
 });
 
-router.get('/login', function (req, res, next) {
-	return res.render('login.ejs');
-});
-
-router.post('/login', function (req, res, next) {
-	//console.log(req.body);
-	User.findOne({email:req.body.email},function(err,data){
-		if(data){
-			
-			if(data.password==req.body.password){
-				//console.log("Done Login");
-				req.session.userId = data.unique_id;
-				//console.log(req.session.userId);
-				res.send({"Success":"Success!"});
-				
-			}else{
-				res.send({"Success":"Wrong password!"});
-			}
-		}else{
-			res.send({"Success":"This Email Is not regestered!"});
-		}
-	});
-});
-
 router.get('/profile', function (req, res, next) {
-	console.log("profile");
 	User.findOne({unique_id:req.session.userId},function(err,data){
 		console.log("data");
 		console.log(data);
