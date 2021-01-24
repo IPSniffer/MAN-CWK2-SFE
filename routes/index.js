@@ -17,7 +17,7 @@ router.post('/', function (req, res, next) {
 				//console.log("Done Login");
 				req.session.userId = data.unique_id;
 				//console.log(req.session.userId);
-				res.send({"Success":"Success!"});
+				res.redirect("/home");
 				
 			}else{
 				res.send({"Success":"Wrong password!"});
@@ -74,27 +74,64 @@ router.post('/register', function(req, res, next) {
 						});
 
 					}).sort({_id: -1}).limit(1);
-					res.send({"Success":"You are regestered,You can login now."});
+					res.redirect("/");
 				}else{
-					res.send({"Success":"Email is already used."});
+					res.redirect("/");
 				}
 
 			});
 		}else{
-			res.send({"Success":"password is not matched"});
+			res.send({"Error":"password is not matched"});
 		}
 	}
 });
 
-router.get('/profile', function (req, res, next) {
+router.get('/home', function (req, res, next) {
 	User.findOne({unique_id:req.session.userId},function(err,data){
-		console.log("data");
-		console.log(data);
 		if(!data){
 			res.redirect('/');
 		}else{
-			//console.log("found");
 			return res.render('data.ejs', {"name":data.username,"email":data.email, "gender":data.gender});
+		}
+	});
+});
+
+router.get('/profile', function (req, res, next) {
+	User.findOne({unique_id:req.session.userId},function(err,data){
+		if(!data){
+			res.redirect('/');
+		}else{
+			return res.render('profile.ejs', {"name":data.username,"email":data.email, "gender":data.gender});
+		}
+	});
+});
+
+router.get('/map-a-nurse', function (req, res, next) {
+	User.findOne({unique_id:req.session.userId},function(err,data){
+		if(!data){
+			res.redirect('/');
+		}else{
+			return res.render('map-a-nurse.ejs', {"name":data.username,"email":data.email, "gender":data.gender});
+		}
+	});
+});
+
+router.get('/request-a-nurse', function (req, res, next) {
+	User.findOne({unique_id:req.session.userId},function(err,data){
+		if(!data){
+			res.redirect('/');
+		}else{
+			return res.render('request-a-nurse.ejs', {"name":data.username,"email":data.email, "gender":data.gender});
+		}
+	});
+});
+
+router.get('/profile/edit', async function (req, res, next) {
+	User.findOne({unique_id:req.session.userId},function(err,data){
+		if(!data){
+			res.redirect('/');
+		}else{
+			return res.render('edit.ejs', {"name":data.username,"email":data.email, "gender":data.gender});
 		}
 	});
 });
@@ -145,4 +182,4 @@ router.post('/forgetpass', function (req, res, next) {
 	
 });
 
-module.exports = router;
+module.exports = router;module.exports = router;module.exports = router;module.exports = router;module.exports = router;module.exports = router;module.exports = router;module.exports = router;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MAP-A-NURSE | HOME</title>
+	<title>MAP-A-NURSE | Edit</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
@@ -34,15 +34,25 @@
 			</ul>
 			</div>
 		</div>
-		<span><a href="/logout">Logout</a></span>
-		<span>Welcome <%= name %></span>
-	</nav>
-	<main style="max-width: 100%; overflow: hidden;">
-		<div class="row" style="display: flex; min-height: 80vh;">
-			<div class="col-6 col-sm-3 bg-light text-center"></div>
-			<div class="col-6 col-sm-9 bg-primary">MAP OF LONDON WITH DIFFERENT BOROUGHS</div>
-		  </div>
-		</div>
-	</main>
+    </nav>
+    <main class="container text-center">
+        <h1>Edit My Profile</h1>
+        <form action="/note/<%= %>?_method=PATCH" method="POST">
+            <label for="name">Name</label>
+            <br>
+            <input type="text" id="name" name="name" value="<%=  %>">
+            <br>
+            <label for="email">Email</label>
+            <br>
+            <input type="text" id="email" name="email" value="<%=  %>">
+            <br>
+            <label for="gender">Gender</label>
+            <br>
+            <input type="text" id="gender" name="gender" value="<%=  %>">
+            <br>
+            <button class="btn btn-success m-2">Update</button>
+        </form>
+        <a href="/home">Cancel</a>
+    </main>
 </body>
 </html>

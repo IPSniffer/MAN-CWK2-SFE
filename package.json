@@ -1,7 +1,7 @@
 {
   "name": "creating-registration-and-login-form-in-nodejs-and-mongodb",
   "version": "1.0.0",
-  "description": "This is a user login and registration app using Node.js, Express, Mongoose and express-sessions. ",
+  "description": "This is a user login and registration app using Node.js, Express, Mongoose and express-sessions.",
   "main": "server.js",
   "dependencies": {
     "connect-mongo": "^3.0.0",
@@ -16,11 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/guruhariharaun/creating-registration-and-login-form-in-nodejs-and-mongodb"
-  },
-  "author": "GuruRoxz",
+  "author": "Lucas, Kishoy",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/guruhariharaun/creating-registration-and-login-form-in-nodejs-and-mongodb"
